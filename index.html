@@ -1,221 +1,141 @@
-<!DOCTYPE html>
-<html>
-<head>
-<meta charset="UTF-8">
-<title>Birthday Surprise ❤️</title>
+document.body.innerHTML += `
 
-<script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.9.3/dist/confetti.browser.min.js"></script>
+<div id="birthdayCard">
 
-<style>
+<h1>🎂 Happy Birthday 🎂</h1>
 
-body{
-    margin:0;
-    overflow:hidden;
-    height:100vh;
-    display:flex;
-    justify-content:center;
-    align-items:center;
-    background:linear-gradient(135deg,#ffd6e7,#ffc2d1,#ffb3c6);
-    font-family:Arial,sans-serif;
-}
+<h2>To An Amazing Girl 💖</h2>
 
-.container{
-    text-align:center;
-}
+<p>
+Happy Birthday to an amazing girl who brings happiness wherever she goes!
+</p>
 
-h1{
-    color:#ff006e;
-    font-size:40px;
-    animation:pulse 1.5s infinite;
-}
+<p>
+Today is all about celebrating the beautiful person you are—your kindness,
+your strength, your smile, and the positive energy you bring into everyone's life.
+</p>
 
-@keyframes pulse{
-    50%{
-        transform:scale(1.05);
-    }
-}
+<p>
+May this new year of your life be filled with endless happiness, success,
+good health, unforgettable memories, and all the love your heart can hold.
+</p>
 
-#photo{
-    width:220px;
-    height:220px;
-    object-fit:cover;
-    border-radius:50%;
-    border:5px solid white;
-    box-shadow:0 0 25px rgba(255,255,255,.8);
-    margin-bottom:20px;
-}
+<p>
+Keep chasing your dreams, believing in yourself, and shining brighter than ever.
+You deserve every beautiful thing that life has to offer because you truly are one of a kind.
+</p>
 
-button{
-    border:none;
-    padding:15px 30px;
-    font-size:22px;
-    border-radius:15px;
-    cursor:pointer;
-    transition:0.3s;
-}
+<p>
+Thank you for being such a wonderful person and inspiring those around you every day.
+</p>
 
-#yesBtn{
-    background:#28a745;
-    color:white;
-}
+<p>
+Wishing you a day full of laughter, love, surprises, and moments that make you smile
+from the bottom of your heart.
+</p>
 
-#noBtn{
-    background:#dc3545;
-    color:white;
-    margin-left:15px;
-}
+<h3>
+🎉 May all your dreams come true and may this year be your best one yet! 🎉
+</h3>
 
-.heart{
-    position:absolute;
-    color:red;
-    animation:float 8s linear infinite;
-}
+<h2>
+Happy Birthday, Beautiful! 💐👑✨
+</h2>
 
-@keyframes float{
-    from{
-        transform:translateY(100vh);
-    }
-    to{
-        transform:translateY(-120vh);
-    }
-}
-
-</style>
-</head>
-
-<body>
-
-<div class="container">
-
-<!-- Replace photo.jpg with your uploaded photo name -->
-<img id="photo" src="photo.jpg">
-
-<h1>🎂 Happy Birthday ❤️ 🎂</h1>
-
-<h2>Do you like my birthday wish? 🥺</h2>
-
-<button id="yesBtn" onclick="celebrate()">
-YES 💖
-</button>
-
-<button id="noBtn"
-onclick="moveNo()"
-ontouchstart="moveNo()">
-NO 😢
+<button onclick="document.getElementById('birthdayCard').remove()">
+Close ❤️
 </button>
 
 </div>
 
-<script>
+<style>
 
-// Floating Hearts
-for(let i=0;i<30;i++){
+#birthdayCard{
 
-    let h=document.createElement("div");
+position:fixed;
+top:50%;
+left:50%;
+transform:translate(-50%,-50%);
 
-    h.className="heart";
-    h.innerHTML="❤️";
+width:85%;
+max-width:700px;
 
-    h.style.left=Math.random()*100+"%";
-    h.style.fontSize=(15+Math.random()*30)+"px";
-    h.style.animationDuration=(4+Math.random()*6)+"s";
+background:white;
+color:#333;
 
-    document.body.appendChild(h);
+padding:30px;
+
+border-radius:25px;
+
+box-shadow:0 0 40px rgba(255,255,255,0.8);
+
+overflow-y:auto;
+max-height:80vh;
+
+z-index:9999;
+
+animation:popup .6s ease;
 }
 
-let count=0;
+@keyframes popup{
 
-let messages=[
-"Are you sure? 🥺",
-"Really? 😭",
-"Think again ❤️",
-"Please? 💖",
-"Don't break my heart 😢",
-"Last chance 😭",
-"You actually want YES 😏"
-];
-
-function moveNo(){
-
-    const noBtn=document.getElementById("noBtn");
-    const yesBtn=document.getElementById("yesBtn");
-
-    if(count < messages.length){
-        noBtn.innerHTML=messages[count];
-    }
-
-    count++;
-
-    noBtn.style.position="fixed";
-
-    let maxX=window.innerWidth-noBtn.offsetWidth-20;
-    let maxY=window.innerHeight-noBtn.offsetHeight-20;
-
-    noBtn.style.left=Math.random()*maxX+"px";
-    noBtn.style.top=Math.random()*maxY+"px";
-
-    yesBtn.style.transform=
-    `scale(${1+(count*0.15)})`;
+from{
+opacity:0;
+transform:translate(-50%,-50%) scale(.5);
 }
 
-function celebrate(){
-
-    var duration=10000;
-    var end=Date.now()+duration;
-
-    (function frame(){
-
-        confetti({
-            particleCount:8,
-            angle:60,
-            spread:100,
-            origin:{x:0}
-        });
-
-        confetti({
-            particleCount:8,
-            angle:120,
-            spread:100,
-            origin:{x:1}
-        });
-
-        if(Date.now()<end){
-            requestAnimationFrame(frame);
-        }
-
-    }());
-
-    document.body.innerHTML=`
-    <div style="
-    text-align:center;
-    padding-top:120px;
-    color:white;
-    width:100%;
-    background:linear-gradient(135deg,#ff4d6d,#ff8fab);
-    height:100vh;">
-
-    <h1 style="font-size:60px;">
-    🎉 HAPPY BIRTHDAY 🎉
-    </h1>
-
-    <h2>
-    Wishing you endless happiness,
-    success and beautiful memories ❤️
-    </h2>
-
-    <h1>
-    🎂🎁🎈🎊✨💖🎆
-    </h1>
-
-    <h2>
-    You are amazing 🌟
-    </h2>
-
-    </div>
-    `;
+to{
+opacity:1;
+transform:translate(-50%,-50%) scale(1);
+}
 }
 
-</script>
+#birthdayCard h1{
 
-</body>
-</html>
+font-size:42px;
+color:#ff4081;
+margin-bottom:10px;
+text-align:center;
+}
+
+#birthdayCard h2{
+
+font-size:28px;
+color:#ff6b9d;
+text-align:center;
+}
+
+#birthdayCard h3{
+
+font-size:24px;
+color:#ff1493;
+text-align:center;
+margin-top:20px;
+}
+
+#birthdayCard p{
+
+font-size:18px;
+line-height:1.8;
+text-align:justify;
+margin:15px 0;
+}
+
+#birthdayCard button{
+
+background:#ff4081;
+color:white;
+
+padding:12px 25px;
+
+border:none;
+border-radius:10px;
+
+font-size:18px;
+
+display:block;
+margin:20px auto;
+}
+
+</style>
+`;
