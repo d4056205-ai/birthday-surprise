@@ -1,38 +1,166 @@
 <!DOCTYPE html>
 <html>
 <head>
+<meta charset="UTF-8">
 <title>Birthday Surprise</title>
+
+<script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.9.3/dist/confetti.browser.min.js"></script>
+
 <style>
 body{
+    margin:0;
+    overflow:hidden;
+    font-family:Arial,sans-serif;
     text-align:center;
-    font-family:Arial;
-    margin-top:100px;
+    height:100vh;
+    background:linear-gradient(-45deg,#ff0080,#7928ca,#2af598,#00c6ff);
+    background-size:400% 400%;
+    animation:bg 10s ease infinite;
+    color:white;
+}
+
+@keyframes bg{
+    0%{background-position:0% 50%;}
+    50%{background-position:100% 50%;}
+    100%{background-position:0% 50%;}
+}
+
+.container{
+    margin-top:120px;
+}
+
+h1{
+    font-size:60px;
+    animation:glow 1s infinite alternate;
+}
+
+@keyframes glow{
+    from{transform:scale(1);}
+    to{transform:scale(1.05);}
+}
+
+button{
+    padding:15px 30px;
+    font-size:22px;
+    border:none;
+    border-radius:30px;
+    cursor:pointer;
+    margin:15px;
+}
+
+#yesBtn{
+    background:#ff4081;
+    color:white;
 }
 
 #noBtn{
     position:absolute;
+    background:white;
+}
+
+.balloon{
+    position:absolute;
+    font-size:40px;
+    animation:float 10s linear infinite;
+}
+
+@keyframes float{
+    from{transform:translateY(100vh);}
+    to{transform:translateY(-120vh);}
+}
+
+.heart{
+    position:absolute;
+    color:red;
+    font-size:25px;
+    animation:heartFloat 5s linear infinite;
+}
+
+@keyframes heartFloat{
+    from{transform:translateY(100vh);}
+    to{transform:translateY(-100vh);}
 }
 </style>
 </head>
+
 <body>
 
-<h1>🎂 Happy Birthday! 🎂</h1>
-<h2>Do you like my birthday wish?</h2>
+<div class="container">
+<h1>🎂 Happy Birthday 🎂</h1>
+<h2>Do you like my birthday wish? ❤️</h2>
 
-<button onclick="showMessage()">Yes ❤️</button>
-<button id="noBtn">No 😢</button>
+<button id="yesBtn" onclick="celebrate()">YES 💖</button>
+<button id="noBtn">NO 😢</button>
+</div>
 
 <script>
-function showMessage() {
-    alert("🎉 Thank you! Wishing you lots of happiness, success, and joy on your birthday! 🎂✨");
+
+// Balloons
+for(let i=0;i<20;i++){
+ let b=document.createElement("div");
+ b.className="balloon";
+ b.innerHTML="🎈";
+ b.style.left=Math.random()*100+"%";
+ b.style.animationDuration=(5+Math.random()*8)+"s";
+ document.body.appendChild(b);
 }
 
-const noBtn = document.getElementById("noBtn");
+// Hearts
+for(let i=0;i<30;i++){
+ let h=document.createElement("div");
+ h.className="heart";
+ h.innerHTML="❤️";
+ h.style.left=Math.random()*100+"%";
+ h.style.animationDuration=(3+Math.random()*5)+"s";
+ document.body.appendChild(h);
+}
 
-noBtn.addEventListener("mouseover", () => {
-    noBtn.style.left = Math.random() * (window.innerWidth - 100) + "px";
-    noBtn.style.top = Math.random() * (window.innerHeight - 50) + "px";
-});
+// Runaway NO button
+const noBtn=document.getElementById("noBtn");
+
+function moveButton(){
+ noBtn.style.left=Math.random()*(window.innerWidth-100)+"px";
+ noBtn.style.top=Math.random()*(window.innerHeight-100)+"px";
+}
+
+noBtn.addEventListener("mouseover",moveButton);
+noBtn.addEventListener("touchstart",moveButton);
+
+// Celebration
+function celebrate(){
+
+ let duration=10000;
+ let end=Date.now()+duration;
+
+ (function frame(){
+   confetti({
+      particleCount:8,
+      angle:60,
+      spread:100,
+      origin:{x:0}
+   });
+
+   confetti({
+      particleCount:8,
+      angle:120,
+      spread:100,
+      origin:{x:1}
+   });
+
+   if(Date.now()<end){
+      requestAnimationFrame(frame);
+   }
+ }());
+
+ document.body.innerHTML=`
+ <div style="padding-top:120px;color:white;">
+ <h1 style="font-size:70px;">🎉 HAPPY BIRTHDAY 🎉</h1>
+ <h2>May your life be filled with happiness, success and endless smiles ❤️</h2>
+ <h1>🎂🎁🎈🎊✨💖🎆</h1>
+ <h2>You are amazing! 🌟</h2>
+ </div>
+ `;
+}
 </script>
 
 </body>
