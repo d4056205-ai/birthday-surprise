@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Birthday Surprise</title>
+<style>
+body{
+    text-align:center;
+    font-family:Arial;
+    margin-top:100px;
+}
+
+#noBtn{
+    position:absolute;
+}
+</style>
+</head>
+<body>
+
+<h1>🎂 Happy Birthday! 🎂</h1>
+<h2>Do you like my birthday wish?</h2>
+
+<button onclick="showMessage()">Yes ❤️</button>
+<button id="noBtn">No 😢</button>
+
+<script>
+function showMessage() {
+    alert("🎉 Thank you! Wishing you lots of happiness, success, and joy on your birthday! 🎂✨");
+}
+
+const noBtn = document.getElementById("noBtn");
+
+noBtn.addEventListener("mouseover", () => {
+    noBtn.style.left = Math.random() * (window.innerWidth - 100) + "px";
+    noBtn.style.top = Math.random() * (window.innerHeight - 50) + "px";
+});
+</script>
+
+</body>
+</html>
